@@ -49,8 +49,6 @@
         .topic-card p {
             color: var(--text-muted); font-size: 0.9rem; line-height: 1.45;
         }
-        .topic-card.linked { border-left-color: #16a34a; }
-        .topic-card.linked .ready { color: #16a34a; font-size: 0.8rem; font-weight: 700; }
         @media (max-width: 1024px) { .spec-grid { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .nav-container { position: static; justify-content: center; margin-bottom: 1rem; } }
     </style>
@@ -68,8 +66,8 @@
     <div class="container">
         <div class="spec-grid">
 
-            <a class="topic-card linked" href="religious-experience.html">
-                <h3>Religious Experience <span class="ready">&#10003; READY</span></h3>
+            <a class="topic-card" href="religious-experience.html" style="text-decoration: none;">
+                <h3>Religious Experience <span class="arrow">&rarr;</span></h3>
                 <p>The nature and influence of religious experience: mystical and conversion experiences; Otto, James and Teresa; the three interpretations; the argument from experience.</p>
             </a>
 
