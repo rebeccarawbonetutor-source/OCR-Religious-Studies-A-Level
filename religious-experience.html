@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy of Religion: Religious Experience</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">&#127968; Home</a>
+            <a href="philosophy.html" class="nav-btn">&larr; Paper 1</a>
+        </div>
+        <h1>Philosophy of Religion: Religious Experience</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Religious Experience</div>
+
+            <div class="branches-wrapper">
+
+                <!-- LEFT COLUMN: Knowledge and Understanding -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Knowledge &amp; Understanding</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>What is a religious experience?</h3>
+                            <span class="badge">Definitions</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Direct experience of the divine, its nature and its influence.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Definition &amp; Schleiermacher <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Directly experienced:</strong> not learned second-hand from scripture or tradition.</li>
+                                        <li><strong>William James</strong> ("The Varieties of Religious Experience", 1902): "The feelings, acts, and experiences of individual men in their solitude, so far as they apprehend themselves to stand in relation to whatever they may consider the divine."</li>
+                                        <li><strong>Schleiermacher</strong> ("On Religion", 1799; "The Christian Faith", 1821): religion is neither knowledge nor morality but a <strong>feeling of absolute dependence</strong> &mdash; the self wholly contingent on a greater power.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Nature and influence <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Nature:</strong> quasi-perceptual awareness of the divine &mdash; the person experiences, rather than reasons to, God.</li>
+                                        <li><strong>Paul:</strong> persecutor become apostle to the Gentiles; three missionary journeys, much of the New Testament.</li>
+                                        <li><strong>Teresa of Avila:</strong> reformed the Carmelite order; shaped Christian mysticism for centuries.</li>
+                                        <li><strong>James:</strong> judge experiences "by their fruits", not their roots &mdash; the moral change they produce.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Mystical and conversion experience</h3>
+                            <span class="badge">Types</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Stace, Teresa of Avila, James's divided self and the Damascus road.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Mystical experience <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> a direct feeling of union with, or awareness of, a greater power, beyond ordinary sense experience.</li>
+                                        <li><strong>Stace</strong> ("Mysticism and Philosophy", 1960): <strong>extrovertive</strong> &mdash; unity perceived through the world; <strong>introvertive</strong> &mdash; unity found within, the ego dissolving in stillness and prayer.</li>
+                                        <li><strong>Teresa of Avila</strong> ("The Autobiography"): visions, locutions (inner words from God), raptures; <strong>four degrees of prayer</strong> symbolised by the "four waters", from laborious effort to passive union.</li>
+                                        <li><strong>The transverberation:</strong> an angel pierces her heart with a flaming golden dart (ch. 29), leaving her "on fire" with love of God &mdash; sculpted by Bernini, "The Ecstasy of Saint Teresa" (Rome, 1645&ndash;52).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Conversion experience <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Definition:</strong> a transformative turning towards God, changing beliefs, values and way of life.</li>
+                                        <li><strong>James:</strong> the <strong>unification of a divided self</strong> by a power beyond conscious control &mdash; <strong>once-born</strong> (gradual, "healthy-minded") vs <strong>twice-born</strong> (sudden crisis of the "sick soul", the profounder type); worked up from the <strong>subliminal</strong> self.</li>
+                                        <li><strong>Paul, Damascus road</strong> (Acts 9.3&ndash;9; also 22 and 26): blinding light, "Saul, Saul, why do you persecute me?", three days' blindness healed by Ananias; Paul reads it as God choosing "to reveal his Son in me" (Galatians 1.16).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Two key thinkers</h3>
+                            <span class="badge">Scholars</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Otto on the numinous; James on the four marks of mysticism.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Rudolf Otto &mdash; the numinous <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>"The Idea of the Holy"</strong> (1917/1923): the heart of religion is the <strong>numinous</strong> &mdash; the "wholly other", beyond concepts and words.</li>
+                                        <li><strong>Mysterium tremendum et fascinans:</strong> awe and dread together with fascination drawing one in.</li>
+                                        <li><strong>Creature-feeling:</strong> one's own nothingness, "mere dust and ashes", before an overwhelming power.</li>
+                                        <li><strong>A priori:</strong> a category the mind brings, not learned from the senses.</li>
+                                        <li><strong>Non-rational, not irrational:</strong> later "schematisation" dresses it in rational ideas (father, love), which the raw experience outruns.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>William James &mdash; four marks and conclusion <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Ineffability</strong> &mdash; defies expression.</li>
+                                        <li><strong>Noetic quality</strong> &mdash; feels like insight into truth.</li>
+                                        <li><strong>Transiency</strong> &mdash; brief, though recallable (lectures 9&ndash;10).</li>
+                                        <li><strong>Passivity</strong> &mdash; grasped by a power beyond control.</li>
+                                        <li><strong>Conclusion</strong> (lectures 16&ndash;20): authoritative <strong>for the one who has them</strong>; suggest a <strong>wider self</strong> &mdash; a "more" with which we are in touch &mdash; but cannot prove its nature to others.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>How can experiences be understood?</h3>
+                            <span class="badge">Interpretations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Union, psychological effect, or physiological effect.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The three readings <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>As union with a greater power:</strong> genuine contact &mdash; Schleiermacher (dependence), Otto (the numinous), Teresa (union in prayer), James (the wider self) &mdash; evidence of the transcendent.</li>
+                                        <li><strong>As a psychological effect:</strong> an illusion produced by the mind (Feuerbach, Freud, Jung) &mdash; real to the person, but psychic, not divine, in origin.</li>
+                                        <li><strong>As a physiological effect:</strong> the product of body and brain &mdash; epilepsy, drugs, fasting and sensory deprivation produce "religious" sensations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Psychology and physiology</h3>
+                            <span class="badge">Challenges</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Feuerbach, Freud, Jung and the physiological evidence.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Feuerbach &mdash; projection <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>"The Essence of Christianity"</strong> (1841): God is the <strong>projection</strong> of idealised human qualities onto a heavenly father; "theology is anthropology".</li>
+                                        <li>Religious experience is an encounter with our own projected ideals.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Freud &mdash; illusion and wish fulfilment <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>Religion is "the universal obsessional neurosis of humanity" ("Obsessive Actions and Religious Practices", 1907).</li>
+                                        <li><strong>"The Future of an Illusion"</strong> (1927): an <strong>illusion</strong> derives from <strong>wishes</strong>, not evidence &mdash; God the projected father-figure of helpless humanity.</li>
+                                        <li><strong>"Civilization and Its Discontents"</strong> (1930): the "oceanic feeling" traced to the infant's undissolved ego, not to God.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Jung &mdash; the collective unconscious <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>"Psychology and Religion"</strong> (1938): religion is the experience of the <strong>numinosum</strong>, an agency not under conscious control.</li>
+                                        <li>Its source: the <strong>collective unconscious</strong> &mdash; universal <strong>archetypes</strong>, including the God-image.</li>
+                                        <li>Unlike Freud: the experience is <strong>psychologically real and vital</strong> &mdash; but its origin is the psyche, not necessarily God.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The physiological evidence <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Temporal lobe epilepsy:</strong> ecstatic auras &mdash; Dostoevsky described such an aura before his seizures.</li>
+                                        <li><strong>Persinger's "God helmet":</strong> induced a "sensed presence" by magnetic stimulation &mdash; contested, not always replicated.</li>
+                                        <li><strong>Newberg</strong> ("Why God Won't Go Away", 2001): imaging of praying nuns and meditating monks shows changed blood flow during intense practice.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Corporate (shared) experiences</h3>
+                            <span class="badge">Examples</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Experiences shared by a whole group at once.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Pentecost and the Toronto Blessing <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Pentecost</strong> (Acts 2): the Spirit as tongues of fire; all speak in other languages and the crowd hears its own tongues &mdash; the model corporate experience.</li>
+                                        <li><strong>The Toronto Blessing</strong> (1994, Toronto Airport church): congregations affected together &mdash; laughter, weeping, shaking, falling &mdash; spread worldwide by report and expectation.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Analysis and Evaluation -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Analysis &amp; Evaluation</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The argument from religious experience</h3>
+                            <span class="badge">The Argument</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Swinburne, Alston and the cumulative case.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Swinburne &mdash; two principles <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>"The Existence of God"</strong> (1979).</li>
+                                        <li><strong>Principle of Credulity:</strong> "in the absence of special considerations, if it seems to a subject that x is present, then probably x is present" &mdash; if it seems God is present, He probably is; the <strong>burden of proof</strong> lies with the sceptic.</li>
+                                        <li><strong>Principle of Testimony:</strong> others' experiences are probably as they sincerely report them.</li>
+                                        <li>Rejecting religious experience wholesale would demand rejecting sense experience too.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Alston &mdash; Perceiving God <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>"Perceiving God"</strong> (1991): religious experience is a <strong>doxastic practice</strong> &mdash; a socially established way of forming beliefs, like sense perception.</li>
+                                        <li>It is <strong>rational</strong> to trust it unless shown unreliable; there is no neutral standpoint that discredits it without discrediting perception too.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The cumulative case <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>No single experience proves God, but <strong>millions of experiences</strong> across every culture and era, consistently reporting a greater power, together make theism <strong>probable</strong>.</li>
+                                        <li>A posteriori, inductive &mdash; a probability argument, not a proof.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The three debate questions</h3>
+                            <span class="badge">Debates</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Testimony, corporate experiences, and the basis for belief.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Is personal testimony enough to support validity? <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Yes:</strong> Swinburne's Principle of Testimony &mdash; we trust sincere reports everywhere else; rejecting them here is arbitrary.</li>
+                                        <li><strong>James:</strong> the <strong>fruits</strong> corroborate sincerity &mdash; Paul's transformed life is not the behaviour of a fraud; Teresa's self-critical accounts (doubting her own visions) show an honest witness.</li>
+                                        <li><strong>No:</strong> sincerity is not <strong>truth</strong> &mdash; people sincerely report alien abductions; whole communities report incompatible gods.</li>
+                                        <li><strong>Key point:</strong> testimony transfers the experience, never its <strong>interpretation</strong> &mdash; "it seemed to me to be God" is all it can deliver.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Are corporate experiences more reliable? <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Yes:</strong> many witnesses at once corroborate each other; a shared hallucination by independent observers is far harder to accept than one delusion; corporate experiences found communities &mdash; the Church grew from Pentecost.</li>
+                                        <li><strong>No:</strong> crowd psychology &mdash; expectation, contagion, suggestion; the Toronto Blessing spread by anticipation of its effects &mdash; evidence of suggestion, not the Spirit. Group agreement shows shared psychology, not a shared object.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The conflicting claims problem <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>Christians experience the Trinity; Muslims Allah; Hindus Brahman &mdash; <strong>incompatible</strong> objects.</li>
+                                        <li>Not all can be veridical: most experiencers must be mistaken &mdash; so why trust any?</li>
+                                        <li><strong>Reply:</strong> all agree on <strong>one</strong> greater power &mdash; Hick's "the Real" beyond all human images; disagreement about the object's nature is not evidence against its existence.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Further challenges</h3>
+                            <span class="badge">Objections</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Projection, verification and Ockham's razor.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Projection and wish fulfilment <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Feuerbach:</strong> God is projected ideals &mdash; the experience is an encounter with ourselves.</li>
+                                        <li><strong>Freud:</strong> the mind's wish for a protective father &mdash; an illusion by definition, from wishes not evidence.</li>
+                                        <li>Both give a <strong>complete alternative explanation</strong> needing no God &mdash; so the experience cannot be evidence for one.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The verification challenge <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Ayer</strong> ("Language, Truth and Logic", 1936): meaningful only if verifiable &mdash; a private, ineffable, transient experience cannot be <strong>checked, repeated or shared</strong>; never public evidence.</li>
+                                        <li><strong>Reply:</strong> other minds and the past are unverifiable too; Ayer's criterion famously fails its own test.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The physiological challenge <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>Every reported feature can be <strong>artificially produced</strong> &mdash; epilepsy, the "God helmet", imaging, fasting, drugs.</li>
+                                        <li>If the brain generates the content alone, God is an unnecessary extra &mdash; <strong>Ockham's razor</strong> cuts it out.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Evaluation</h3>
+                            <span class="badge">Evaluation</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Strengths and weaknesses of the argument.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Strengths of the argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The fruits (James):</strong> transformed lives &mdash; Paul, Teresa &mdash; are historical facts; effects verifiable even if objects are not; authority <strong>for the experient</strong> cannot be stripped by argument.</li>
+                                        <li><strong>Epistemic fairness (Swinburne, Alston):</strong> the sceptic's standard of doubt, applied consistently, destroys perception, memory and testimony; we check perception only by more perception.</li>
+                                        <li><strong>The critics concede the phenomenon:</strong> Jung &mdash; psychologically real and vital; Freud concedes the feeling; the dispute is over its <strong>cause</strong>, not its reality.</li>
+                                        <li><strong>Non-competing explanations:</strong> a natural mechanism does not exclude God as cause &mdash; <strong>how</strong> it occurs never settles <strong>whether</strong> it is divine contact; the circuitry explains the music, not the absence of an orchestra.</li>
+                                        <li><strong>Conflicting claims survivable:</strong> accident witnesses disagree wildly &mdash; perception is partial, not empty; Hick's Real preserves one object behind many images.</li>
+                                        <li><strong>The right kind of claim:</strong> probability (Swinburne), authority for the experient (James) &mdash; as a cumulative strand the argument carries real weight.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Weaknesses of the argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Conflicting claims:</strong> if most experiencers are sincerely wrong, "seems to me" to "is" is shown unreliable <strong>in this very field</strong>.</li>
+                                        <li><strong>A complete rival explanation:</strong> projection and wish fulfilment explain the phenomena without remainder &mdash; Ockham's razor cuts out the needless extra.</li>
+                                        <li><strong>Symmetric physiological evidence:</strong> everything can be induced; the receiver reply &mdash; brain as receiver, not generator &mdash; is an assumption, unfalsifiable.</li>
+                                        <li><strong>Privacy defeats public proof:</strong> ineffability, transiency, passivity &mdash; James's own marks &mdash; make outside assessment impossible; never above probability for the non-experient.</li>
+                                        <li><strong>Receiver reply is a defence, not evidence:</strong> "God could work through the brain" assumes what it needs to show.</li>
+                                        <li><strong>Probability is thin:</strong> it cannot convert a sceptic &mdash; the evidence is always second-hand.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
