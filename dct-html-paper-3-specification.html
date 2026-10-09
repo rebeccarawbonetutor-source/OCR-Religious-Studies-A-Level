@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width="device-width, initial-scale=1.0">
+    <title>Paper 3: Developments in Christian Thought — Specification</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc; --card-bg: #ffffff; --card-border: #94a3b8;
+            --text-main: #0f172a; --text-muted: #475569;
+            --accent-primary: #0369a1; --accent-header: #075985;
+            --hover-bg: #f1f5f9; --line-color: #0369a1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; overflow-x: auto;
+        }
+        header { padding: 1.5rem 1rem 1rem; text-align: center; border-bottom: 1px solid #cbd5e1; background: #ffffff; position: relative; }
+        .nav-container { position: absolute; top: 1.5rem; left: 2rem; display: flex; gap: 10px; }
+        .nav-btn {
+            background-color: #ffffff; color: var(--accent-header); border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none;
+            font-size: 0.9rem; transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .nav-btn:hover { background-color: var(--hover-bg); border-color: var(--accent-primary); }
+        header h1 { font-size: 2.2rem; color: var(--accent-header); font-weight: 700; }
+        header p.subtitle { color: var(--text-muted); font-size: 1.05rem; margin-top: 0.4rem; }
+        .container {
+            max-width: 1600px; margin: 0 auto; padding: 3rem 2rem 2rem;
+            display: flex; flex-direction: column; align-items: center; flex: 1; width: 100%;
+        }
+        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; max-width: 1200px; }
+        .topic-card {
+            background-color: var(--card-bg); border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary); border-radius: 8px;
+            padding: 1.1rem 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); color: inherit;
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .topic-card h3 {
+            font-size: 1.05rem; color: var(--accent-header); font-weight: 700;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .topic-card h3 .arrow { color: var(--accent-primary); font-weight: bold; }
+        .topic-card p {
+            color: var(--text-muted); font-size: 0.9rem; line-height: 1.45;
+        }
+        @media (max-width: 1024px) { .spec-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .nav-container { position: static; justify-content: center; margin-bottom: 1rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">&#127968; Home</a>
+        </div>
+        <h1>Developments in Christian Thought</h1>
+        <p class="subtitle">Paper 3 &bull; H573/03 &mdash; Specification Topics</p>
+    </header>
+
+    <div class="container">
+        <div class="spec-grid">
+
+            <div class="topic-card">
+                <h3>Augustine's Teaching on Human Nature <span class="arrow">&rarr;</span></h3>
+                <p>Genesis 3 and the Fall, friendship before and lust after; Original Sin, its effects on the will and societies; only God's grace can overcome sin.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Death and the Afterlife <span class="arrow">&rarr;</span></h3>
+                <p>Judgement, heaven and hell, purgatory; election — limited, unlimited and universalist; the parable of the sheep and the goats.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Knowledge of God's Existence <span class="arrow">&rarr;</span></h3>
+                <p>Natural knowledge through reason and empiricism (Calvin, Romans 1); revealed knowledge through grace and faith (Barth); their relative sufficiency.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>The Person of Jesus Christ <span class="arrow">&rarr;</span></h3>
+                <p>Jesus as Son of God, teacher of wisdom, liberator; his authority, resurrection and divinity — the views of Bultmann, Hick and John's Gospel.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Christian Moral Principles <span class="arrow">&rarr;</span></h3>
+                <p>Dominant secular vs Christian values; the Bible as a moral guide; agape, reason and conscience — whether Christian ethics are distinctive.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Christian Moral Action <span class="arrow">&rarr;</span></h3>
+                <p>Bonhoeffer: obedience and civil disobedience, suffering, and the cost of discipleship; whether his theology has relevance today.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Gender and Theology <span class="arrow">&rarr;</span></h3>
+                <p>Gender, God and feminist theology; Ruether and Daly on patriarchy, whether Christianity can be changed or should be abandoned.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>The Challenge of Secularism <span class="arrow">&rarr;</span></h3>
+                <p>Secularisation and its causes; God as illusion (Freud, Dawkins); Christianity and public life; responses from believers.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Liberation Theology and Marx <span class="arrow">&rarr;</span></h3>
+                <p>Marx's influence, sin as structural injustice, praxis and orthopraxy; Romero and the option for the poor; criticisms from the Magisterium.</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
