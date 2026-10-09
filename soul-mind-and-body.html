@@ -1,297 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Philosophy of Religion — Soul, Mind and Body Mind Map</title>
-<style>
-:root{
-  --bg:#faf9f6; --card:#fff; --text:#2c2c2a; --muted:#5f5e5a;
-  --purple:#7f77dd; --purple-d:#26215c; --purple-l:#eeedfe;
-  --teal:#1d9e75; --teal-d:#04342c; --teal-l:#e1f5ee;
-  --coral:#d85a30; --coral-d:#4a1b0c; --coral-l:#faece7;
-  --line:#b4b2a9;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;padding:28px 16px 60px;background:var(--bg);color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  line-height:1.48
-}
-.center-wrap{display:flex;justify-content:center;margin-top:10px}
-.center{
-  background:var(--text);color:#fff;padding:16px 28px;border-radius:12px;
-  font-size:18px;font-weight:650;text-align:center;max-width:380px
-}
-.connector{display:block;width:100%;max-width:900px;margin:0 auto;height:42px}
-.connector line{stroke:var(--line);stroke-width:1.5}
-.branches{
-  display:flex;gap:20px;justify-content:center;align-items:flex-start;
-  max-width:1250px;margin:0 auto
-}
-.branch{
-  flex:1 1 0;min-width:0;border-radius:14px;padding:17px 17px 8px;
-  border:1.5px solid var(--line)
-}
-.branch.purple{background:var(--purple-l);border-color:var(--purple)}
-.branch.teal{background:var(--teal-l);border-color:var(--teal)}
-.branch.coral{background:var(--coral-l);border-color:var(--coral)}
-.branch h2{font-size:15px;line-height:1.35;margin:0 0 12px;font-weight:650}
-.purple h2{color:var(--purple-d)} .teal h2{color:var(--teal-d)} .coral h2{color:var(--coral-d)}
-details{
-  background:var(--card);border-radius:8px;margin-bottom:9px;
-  border:1px solid rgba(0,0,0,.08)
-}
-summary{
-  cursor:pointer;padding:10px 12px;font-weight:650;font-size:13.5px;
-  list-style:none;position:relative;padding-right:30px
-}
-summary::-webkit-details-marker{display:none}
-summary::after{
-  content:"+";position:absolute;right:12px;top:8px;font-size:16px;color:var(--muted)
-}
-details[open] summary::after{content:"−"}
-.body{padding:0 14px 12px;font-size:12.7px;color:var(--muted)}
-.body p{margin:6px 0}
-.body strong{color:var(--text)}
-.sub-item{
-  margin:8px 0;padding:7px 9px;border-left:2px solid rgba(0,0,0,.12);
-  background:rgba(255,255,255,.55);border-radius:0 6px 6px 0
-}
-.who{font-weight:650;color:var(--text);font-size:12.3px;margin-bottom:2px}
-.quote{font-style:italic}
-.source{font-size:11.5px;color:#777;margin-top:3px}
-.toolbar{text-align:center;margin:14px 0 18px}
-button{
-  border:1px solid #aaa;border-radius:7px;background:#fff;padding:7px 11px;
-  margin:0 3px;cursor:pointer;font-size:12px
-}
-button:hover{background:#f1f1ef}
-.note{text-align:center;color:var(--muted);font-size:11.5px;margin-top:14px}
-@page{size:A4 landscape;margin:9mm}
-@media print{
-  body{background:#fff;padding:0;font-size:10px}
-  .toolbar,.note{display:none}
-  .center{font-size:15px;padding:11px 20px}
-  .connector{height:28px}
-  .branches{gap:10px}
-  .branch{padding:11px 11px 4px}
-  .branch h2{font-size:11px}
-  details{break-inside:avoid;margin-bottom:5px}
-  summary{font-size:9.5px;padding:6px 8px}
-  summary::after{display:none}
-  details[open] .body{display:block}
-  .body{font-size:8.6px;padding:0 8px 7px}
-  .sub-item{margin:4px 0;padding:4px 6px}
-  .who{font-size:8.4px}
-  .source{font-size:7.8px}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy of Religion: Soul, Mind and Body</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 1rem 0 0;
+        }
+
+        .controls button {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .controls button:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="toolbar">
-  <button onclick="openAll()">Open all</button>
-  <button onclick="closeAll()">Close all</button>
-</div>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">&#127968; Home</a>
+            <a href="philosophy.html" class="nav-btn">&larr; Paper 1</a>
+        </div>
+        <h1>Philosophy of Religion: Soul, Mind and Body</h1>
+        <div class="controls">
+            <button type="button" onclick="document.querySelectorAll('.sub-node').forEach(n => n.classList.add('active'))">Open all</button>
+            <button type="button" onclick="document.querySelectorAll('.sub-node').forEach(n => n.classList.remove('active'))">Close all</button>
+        </div>
+    </header>
 
-<div class="center-wrap">
-  <div class="center">Philosophy of Religion - Soul, mind and body</div>
-</div>
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Soul, Mind and Body</div>
 
-<svg class="connector" viewBox="0 0 300 42" preserveAspectRatio="none" aria-hidden="true">
-  <line x1="150" y1="0" x2="150" y2="14"></line>
-  <line x1="50" y1="14" x2="250" y2="14"></line>
-  <line x1="50" y1="14" x2="50" y2="42"></line>
-  <line x1="150" y1="14" x2="150" y2="42"></line>
-  <line x1="250" y1="14" x2="250" y2="42"></line>
-</svg>
+            <div class="branches-wrapper">
 
-<div class="branches">
+                <!-- LEFT COLUMN -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Plato, Aristotle &amp; the Foundations</div>
 
-<!-- BRANCH 1 -->
-<section class="branch purple">
-<h2>1. Plato &amp; Aristotle (Forms, Recollection &amp; Hylomorphism)</h2>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Core definitions</h3>
+                            <span class="badge">Definitions</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                The key positions in the debate.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Key definitions <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Dualism:</strong> the view that there are two different types of existence: mental and physical.</li>
+                                        <li><strong>Monism:</strong> the view that there is one kind of existence.</li>
+                                        <li><strong>Materialism:</strong> the view that existence is strictly physical substance.</li>
+                                        <li><strong>Substance Dualism:</strong> Descartes' version, arguing that mental substance (characterised by thinking) and physical substance (characterised by extension) are unbreakable fundamental substances.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Core Definitions</summary>
-<div class="body">
-<p><strong>Key Definitions:</strong></p>
-<ul>
-  <li><strong>Dualism:</strong> The view that there are two different types of existence: mental and physical.</li>
-  <li><strong>Monism:</strong> The view that there is one kind of existence.</li>
-  <li><strong>Materialism:</strong> The view that existence is strictly physical substance.</li>
-  <li><strong>Substance Dualism:</strong> Descartes' version arguing that mental (characterised by thinking) and physical (characterised by extension) are unbreakable fundamental substances.</li>
-</ul>
-</div>
-</details>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Plato's dualism and analogies</h3>
+                            <span class="badge">Plato</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                The soul trapped in the world of appearances.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Plato's dualism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Prison metaphor:</strong> the body acts as a prison trapping the soul in a world of appearances, while souls originate from the unchanging World of Forms.</li>
+                                        <li><strong>Degrees of reality:</strong> minds and abstract Forms represent a higher degree of reality than the physical body.</li>
+                                        <li><strong>The charioteer analogy:</strong> the soul as a charioteer (reason) driving a noble horse (spirit/honour) and an unruly horse (appetite/desire). Harmony leads to truth; dominance leads to ignorance.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Plato's Dualism &amp; Analogies</summary>
-<div class="body">
-<p><strong>Plato's Dualism:</strong></p>
-<ul>
-  <li><strong>Prison Metaphor:</strong> The body acts as a prison trapping the soul in a world of appearances, while souls originate from the unchanging World of Forms.</li>
-  <li><strong>Degrees of Reality:</strong> Minds and abstract forms represent a higher degree of reality than the physical body.</li>
-  <li><strong>The Charioteer Analogy:</strong> Compares the soul to a charioteer (reason) driving a noble horse (spirit/honour) and an unruly horse (appetite/desire). Harmony leads to truth; dominance leads to ignorance.</li>
-</ul>
-</div>
-</details>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Plato's argument from recollection</h3>
+                            <span class="badge">Plato</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Anamnesis, the Meno and the cycle of opposites &mdash; with Hume's critique.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Anamnesis and the cycle of opposites <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>A priori knowledge:</strong> we possess knowledge of perfect concepts (justice, beauty, perfect circles) never fully experienced in the physical world.</li>
+                                        <li><strong>The Meno:</strong> Socrates demonstrated that an uneducated slave boy could solve geometry, proving innate geometric concepts.</li>
+                                        <li><strong>Cycle of opposites:</strong> souls cycle between life and death.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Criticisms <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>David Hume:</strong> beauty and justice are subjective and culture-dependent rather than objective perfect concepts.</li>
+                                        <li><strong>Abstract negation:</strong> Hume claims we form perfection by conceiving "not imperfect" without needing an innate soul.</li>
+                                        <li><strong>Evolutionary alternative:</strong> evolution could have programmed humans with basic mathematical intuition and moral senses for survival.</li>
+                                        <li><strong>Cycle flaws:</strong> life and death may not be objective opposites, and the expanding universe contradicts eternal balancing.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Plato’s Argument from Recollection &amp; Cycle of Opposites</summary>
-<div class="body">
-<p><strong>Anamnesis &amp; Argument:</strong></p>
-<ul>
-  <li><strong>A Priori Knowledge:</strong> We possess knowledge of perfect concepts (justice, beauty, perfect circles) never fully experienced in the physical world.</li>
-  <li><strong>The Meno:</strong> Socrates demonstrated that an uneducated slave boy could solve geometry, proving innate geometric concepts.</li>
-  <li><strong>Cycle of Opposites:</strong> Argues souls cycle between life and death.</li>
-</ul>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>David Hume:</strong> Argues beauty and justice are subjective and culture-dependent rather than objective perfect concepts.</li>
-  <li><strong>Abstract Negation:</strong> Hume claims we form perfection by conceiving 'not imperfect' without needing an innate soul.</li>
-  <li><strong>Evolutionary Alternative:</strong> Evolution could have programmed humans with basic mathematical intuition and moral senses for survival.</li>
-  <li><strong>Cycle Flaws:</strong> Critics note life and death may not be objective opposites, and the expanding universe contradicts eternal balancing.</li>
-</ul>
-</div>
-</div>
-</details>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Aristotle's hylomorphism</h3>
+                            <span class="badge">Aristotle</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                The soul as the form of the body &mdash; and its scientific critics.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Empirical rejection and hylomorphism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Empirical rejection:</strong> Aristotle rejected Plato's World of Forms as lacking empirical validity and explanatory power for change &mdash; functioning like an early Ockham's razor.</li>
+                                        <li><strong>Formal cause:</strong> form is an inseparable essence defining what a thing is.</li>
+                                        <li><strong>Stamp in wax analogy:</strong> the soul is the formal cause of the body (giving humans the essence of reason), just as a stamp imprint gives character to wax without being a separate entity.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Criticisms <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Francis Bacon:</strong> established the modern scientific method, rejecting formal causation as a metaphysical concept beyond empirical study.</li>
+                                        <li><strong>Scientific reduction:</strong> modern science shows properties like snow's whiteness reduce to particle interactions (efficient/material causation), suggesting rational thought reduces to physical brain structures rather than Aristotelian formal causes.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Aristotle’s Materialist Opposition &amp; Hylomorphism</summary>
-<div class="body">
-<p><strong>Empirical Rejection:</strong> Aristotle rejected Plato's World of Forms as lacking empirical validity and explanatory power for change, functioning like an early Ockham's razor.</p>
-<div class="sub-item"><div class="who">Hylomorphism &amp; Soul</div>
-<ul>
-  <li><strong>Formal Cause:</strong> Form is an inseparable essence defining what a thing is.</li>
-  <li><strong>Stamp in Wax Analogy:</strong> The soul is the formal cause of the body (giving humans the essence of reason), just like a stamp imprint gives character to wax without being a separate entity.</li>
-</ul>
-</div>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>Francis Bacon:</strong> Established the modern scientific method, rejecting formal causation as a metaphysical concept beyond empirical study.</li>
-  <li><strong>Scientific Reduction:</strong> Modern science shows properties like snow's whiteness reduce to particle interactions (efficient/material causation), suggesting rational thought reduces to physical brain structures rather than Aristotelian formal causes.</li>
-</ul>
-</div>
-</div>
-</details>
-</section>
+                </div>
 
-<!-- BRANCH 2 -->
-<section class="branch teal">
-<h2>2. Descartes &amp; Substance Dualism</h2>
+                <!-- RIGHT COLUMN -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Descartes &amp; Modern Materialism</div>
 
-<details>
-<summary>Descartes’ Framework &amp; Cogito Ergo Sum</summary>
-<div class="body">
-<p><strong>Rationalist Foundation:</strong></p>
-<ul>
-  <li><strong>Substance Attributes:</strong> Mental substance is characterised by thinking (non-extended); physical substance by extension (occupying space/coordinates).</li>
-  <li><strong>Cogito Ergo Sum:</strong> Indubitable knowledge begins with 'I think therefore I am', as doubting is a form of thinking.</li>
-  <li><strong>Foundational Doubt:</strong> Descartes used dreams and the evil demon hypothesis to separate the clear intuition of the thinking mind from the doubtful physical body.</li>
-</ul>
-</div>
-</details>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Descartes' framework and the cogito</h3>
+                            <span class="badge">Descartes</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Rationalist foundations of substance dualism.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Rationalist foundation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Substance attributes:</strong> mental substance is characterised by thinking (non-extended); physical substance by extension (occupying space/coordinates).</li>
+                                        <li><strong>Cogito ergo sum:</strong> indubitable knowledge begins with "I think therefore I am", as doubting is a form of thinking.</li>
+                                        <li><strong>Foundational doubt:</strong> Descartes used dreams and the evil demon hypothesis to separate the clear intuition of the thinking mind from the doubtful physical body.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Descartes' Indivisibility Argument</summary>
-<div class="body">
-<p><strong>Indivisibility Argument:</strong> Physical substance is divisible because it is extended in space; the mind is indivisible and non-extended. By Leibniz's Law (identical things must share identical properties), mind and body cannot be identical.</p>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>Scholastic Objection:</strong> Argued the mind can be divided into distinct modes like perception, memory, and emotions.</li>
-  <li><strong>Split-Brain Evidence:</strong> Modern medical evidence from split-brain patients (whose corpus callosum is severed) shows consciousness can exhibit divisions, such as hands acting independently or opposing each other.</li>
-</ul>
-</div>
-</div>
-</details>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Descartes' two arguments for dualism</h3>
+                            <span class="badge">Descartes</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Indivisibility and conceivability &mdash; with their classic objections.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Indivisibility argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The argument:</strong> physical substance is divisible because it is extended in space; the mind is indivisible and non-extended. By Leibniz's Law (identical things must share identical properties), mind and body cannot be identical.</li>
+                                        <li><strong>Scholastic objection:</strong> the mind can be divided into distinct modes like perception, memory and emotions.</li>
+                                        <li><strong>Split-brain evidence:</strong> modern medical evidence from split-brain patients (whose corpus callosum is severed) shows consciousness can exhibit divisions, such as hands acting independently or opposing each other.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Conceivability argument <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The argument:</strong> if we can clearly and distinctly conceive of the mind separate from the body (e.g. as an immaterial ghost), they are possibly, and thus actually, separate.</li>
+                                        <li><strong>Antoine Arnauld:</strong> used a geometric example (conceiving a right-angled triangle without knowing Pythagoras' theorem) to object to Descartes, which later inspired the formal structure of the Masked Man Fallacy.</li>
+                                        <li><strong>The Masked Man Fallacy:</strong> the fallacious inference that because one can conceive of X without Y, X and Y must be distinct (e.g. conceiving of a bank robber as not your father, even though the masked man actually is your father).</li>
+                                        <li><strong>Limits of introspection:</strong> critics argue Descartes wrongly assumes infallible self-knowledge, whereas cognitive psychology shows much mental processing is unconscious.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Descartes' Conceivability Argument</summary>
-<div class="body">
-<p><strong>Conceivability Argument:</strong> If we can clearly and distinctly conceive of the mind separate from the body (e.g., as an immaterial ghost), they are possibly and thus actually separate.</p>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>Antoine Arnauld:</strong> Used a geometric example (conceiving a right-angled triangle without knowing Pythagoras' theorem) to object to Descartes, which later inspired the formal structure of the Masked Man Fallacy.</li>
-  <li><strong>The Masked Man Fallacy:</strong> The fallacious inference that because one can conceive of X without Y, X and Y must be distinct (e.g., conceiving of a bank robber as *not* your father, even though the masked man actually *is* your father).</li>
-  <li><strong>Limits of Introspection:</strong> Critics argue Descartes wrongly assumes infallible self-knowledge, whereas cognitive psychology shows much mental processing is unconscious.</li>
-</ul>
-</div>
-</div>
-</details>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The interaction problem</h3>
+                            <span class="badge">Objections</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                How can two distinct substances causally interact?
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The problem and its critics <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The problem:</strong> if mind and body are distinct substances, how can they interact causally (e.g. mental desire moving an arm)?</li>
+                                        <li><strong>Princess Elisabeth of Bohemia:</strong> physical interaction requires mechanical contact (pushing), which a non-physical substance cannot provide.</li>
+                                        <li><strong>Pineal gland critique:</strong> Descartes' suggestion of the pineal gland merely assigns a physical location rather than explaining the mechanism of interaction.</li>
+                                        <li><strong>Causal closure:</strong> modern physicists argue substance dualism violates the principle of causal closure derived from the second law of thermodynamics, which dictates that energy cannot enter or leave the physical universe from an external non-physical source.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>The Interaction Problem</summary>
-<div class="body">
-<p><strong>The Problem:</strong> If mind and body are distinct substances, how can they interact causally (e.g., mental desire moving an arm)?</p>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>Princess Elisabeth of Bohemia:</strong> Argued that physical interaction requires mechanical contact (pushing), which a non-physical substance cannot provide.</li>
-  <li><strong>Pineal Gland Critique:</strong> Philosophers note that Descartes' suggestion of the pineal gland merely assigns a physical location rather than explaining the mechanism of interaction.</li>
-  <li><strong>Causal Closure:</strong> Modern physicists argue substance dualism violates the principle of causal closure derived from the second law of thermodynamics, which dictates that energy cannot enter or leave the physical universe from an external non-physical source.</li>
-</ul>
-</div>
-</div>
-</details>
-</section>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Ryle, Dawkins and modern materialism</h3>
+                            <span class="badge">Materialism</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Category mistakes, Soul One and Soul Two, identity theory.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Ryle's category mistake and behaviourism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The "ghost in the machine":</strong> Ryle argued dualism commits a category mistake (like asking to see the "university" separate from its buildings). The mind is not a non-physical "thing".</li>
+                                        <li><strong>Philosophical behaviourism:</strong> mental terms refer to behavioural dispositions rather than inner entities (analogous to glass brittleness being a disposition to shatter, not a physical object itself).</li>
+                                        <li><strong>Qualia and subjectivity:</strong> critics argue philosophical behaviourism fails because it ignores the subjective, qualitative feel of conscious awareness ("what it feels like" to have an experience).</li>
+                                        <li><strong>Reductionism:</strong> it reduces rich inner mental life to mere outward tendencies.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Dawkins and reductive materialism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Materialist monism:</strong> Dawkins argues there is no empirical evidence for a soul (Soul One); humans are evolved physical beings composed of DNA and biological matter. "Soul Two" is used purely as a metaphor for emotional/intellectual depth.</li>
+                                        <li><strong>Reductive materialism (Smart):</strong> applies Ockham's razor &mdash; mental states (pain) are ontologically identical to brain states (C-fibre stimulation), supported by correlations from drugs, brain damage and neuroimaging.</li>
+                                        <li><strong>Subjective omission:</strong> critics argue reductive materialism overlooks subjective experience.</li>
+                                        <li><strong>David Chalmers:</strong> identifying mental states with brain states leaves out the qualitative dimension of consciousness.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<!-- BRANCH 3 -->
-<section class="branch coral">
-<h2>3. Ryle, Behaviourism &amp; Modern Materialism</h2>
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>The hard problem and property dualism</h3>
+                            <span class="badge">Modern debates</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Chalmers' challenge and the materialist defence.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Chalmers and the Churchlands <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>David Chalmers' objection:</strong> neuroscience solves the "easy problems" (mapping brain functions to mental tasks), but the "hard problem" &mdash; why physical processes give rise to subjective consciousness &mdash; remains unexplained.</li>
+                                        <li><strong>Patricia and Paul Churchland:</strong> the brain's complexity means reductive explanations are currently inconceivable.</li>
+                                        <li><strong>Methodological preference:</strong> extending physical science is methodologically superior to positing unverified non-physical entities &mdash; comparing eliminative materialism's success to historical dismissals of vital life forces.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<details>
-<summary>Gilbert Ryle’s Category Mistake &amp; Behaviourism</summary>
-<div class="body">
-<p><strong>The "Ghost in the Machine":</strong> Ryle argued dualism commits a category mistake (like asking to see the "university" separate from its buildings). The mind is not a non-physical "thing".</p>
-<div class="sub-item"><div class="who">Philosophical Behaviourism</div>Mental terms refer to behavioural dispositions rather than inner entities (analogous to glass brittleness being a disposition to shatter, not a physical object itself).</div>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>Qualia &amp; Subjectivity:</strong> Critics argue philosophical behaviourism fails because it ignores the subjective, qualitative feel of conscious awareness ("what it feels like" to have an experience).</li>
-  <li><strong>Reductionism:</strong> Reduces rich inner mental life to mere outward tendencies.</li>
-</ul>
-</div>
-</div>
-</details>
+                </div>
 
-<details>
-<summary>Dawkins, Materialism &amp; Reductive Materialism</summary>
-<div class="body">
-<p><strong>Materialist Monism:</strong> Dawkins argues there is no empirical evidence for a soul (Soul One); humans are evolved physical beings composed of DNA and biological matter. "Soul Two" is used purely as a metaphor for emotional/intellectual depth.</p>
-<div class="sub-item"><div class="who">Reductive Materialism (Smart)</div>Applies Occam's Razor: mental states (pain) are ontologically identical to brain states (C-fibre stimulation), supported by correlations from drugs, brain damage, and neuroimaging.</div>
-<div class="sub-item"><div class="who">Criticism</div>
-<ul>
-  <li><strong>Subjective Omission:</strong> Critics argue reductive materialism overlooks subjective experience.</li>
-  <li><strong>David Chalmers:</strong> Points out that identifying mental states with brain states leaves out the qualitative dimension of consciousness.</li>
-</ul>
-</div>
-</div>
-</details>
+            </div>
+        </div>
+    </div>
 
-<details>
-<summary>The Hard Problem &amp; Property Dualism</summary>
-<div class="body">
-<p><strong>David Chalmers' Objections:</strong> Neuroscience solves the "easy problems" (mapping brain functions to mental tasks), but the "hard problem"—why physical processes give rise to subjective consciousness—remains unexplained.</p>
-<div class="sub-item"><div class="who">Materialist Defence</div>
-<ul>
-  <li><strong>Patricia and Paul Churchland:</strong> Argue that the brain's complexity means reductive explanations are currently inconceivable.</li>
-  <li><strong>Methodological Preference:</strong> Extending physical science is methodologically superior to positing unverified non-physical entities, comparing eliminative materialism's success to historical dismissals of vital life forces.</li>
-</ul>
-</div>
-</div>
-</details>
-</section>
-
-</div>
-
-<p class="note">Click a heading to expand or collapse the detail.</p>
-
-<script>
-function openAll(){
-  document.querySelectorAll('details').forEach(d => d.open = true);
-}
-function closeAll(){
-  document.querySelectorAll('details').forEach(d => d.open = false);
-}
-</script>
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
