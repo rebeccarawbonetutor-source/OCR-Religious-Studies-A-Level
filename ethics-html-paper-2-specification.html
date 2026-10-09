@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper 2: Religion and Ethics — Specification</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc; --card-bg: #ffffff; --card-border: #94a3b8;
+            --text-main: #0f172a; --text-muted: #475569;
+            --accent-primary: #0369a1; --accent-header: #075985;
+            --hover-bg: #f1f5f9; --line-color: #0369a1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; overflow-x: auto;
+        }
+        header { padding: 1.5rem 1rem 1rem; text-align: center; border-bottom: 1px solid #cbd5e1; background: #ffffff; position: relative; }
+        .nav-container { position: absolute; top: 1.5rem; left: 2rem; display: flex; gap: 10px; }
+        .nav-btn {
+            background-color: #ffffff; color: var(--accent-header); border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none;
+            font-size: 0.9rem; transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .nav-btn:hover { background-color: var(--hover-bg); border-color: var(--accent-primary); }
+        header h1 { font-size: 2.2rem; color: var(--accent-header); font-weight: 700; }
+        header p.subtitle { color: var(--text-muted); font-size: 1.05rem; margin-top: 0.4rem; }
+        .container {
+            max-width: 1600px; margin: 0 auto; padding: 3rem 2rem 2rem;
+            display: flex; flex-direction: column; align-items: center; flex: 1; width: 100%;
+        }
+        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; width: 100%; max-width: 1200px; }
+        .topic-card {
+            background-color: var(--card-bg); border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary); border-radius: 8px;
+            padding: 1.1rem 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); color: inherit;
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .topic-card h3 {
+            font-size: 1.05rem; color: var(--accent-header); font-weight: 700;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .topic-card h3 .arrow { color: var(--accent-primary); font-weight: bold; }
+        .topic-card p {
+            color: var(--text-muted); font-size: 0.9rem; line-height: 1.45;
+        }
+        @media (max-width: 1024px) { .spec-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .nav-container { position: static; justify-content: center; margin-bottom: 1rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">&#127968; Home</a>
+        </div>
+        <h1>Religion and Ethics</h1>
+        <p class="subtitle">Paper 2 &bull; H573/02 &mdash; Specification Topics</p>
+    </header>
+
+    <div class="container">
+        <div class="spec-grid">
+
+            <div class="topic-card">
+                <h3>Natural Law <span class="arrow">&rarr;</span></h3>
+                <p>Aquinas: four tiers of law, primary and secondary precepts, real and apparent goods, double effect. Challenges from proportionalism.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Situation Ethics <span class="arrow">&rarr;</span></h3>
+                <p>Fletcher: agape as the only norm, the six propositions and four working principles. Challenges from Weber and Vardy.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Kantian Ethics <span class="arrow">&rarr;</span></h3>
+                <p>The categorical and hypothetical imperatives, duty, the three postulates, and universalisability. Challenges from Bentley and Gardiner.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Utilitarianism <span class="arrow">&rarr;</span></h3>
+                <p>Bentham's hedonistic calculus, Mill's rule utilitarianism and higher pleasures, Singer's preference and act utilitarianism.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Euthanasia <span class="arrow">&rarr;</span></h3>
+                <p>Sanctity of life, quality of life, personhood; voluntary, non-voluntary and involuntary euthanasia; applied to the four normative theories.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Business Ethics <span class="arrow">&rarr;</span></h3>
+                <p>Corporate social responsibility, whistle-blowing, good and bad practice; applied to the four normative theories and to human nature theories.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Sexual Ethics <span class="arrow">&rarr;</span></h3>
+                <p>Attitudes to pre- and extra-marital sex and homosexuality; religious and secular views; applied to the four normative theories.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Meta-Ethics <span class="arrow">&rarr;</span></h3>
+                <p>Cognitive and non-cognitive theories; naturalism and emotivism (Ayer, Stevenson), prescriptivism (Hare); Hume's is-ought gap.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Conscience <span class="arrow">&rarr;</span></h3>
+                <p>Aquinas: ratio, synderesis and conscientia; Freud: the super-ego and guilt. Secular vs religious understandings compared.</p>
+            </div>
+
+            <div class="topic-card">
+                <h3>Free Will and Determinism <span class="arrow">&rarr;</span></h3>
+                <p>Hard and soft determinism, libertarianism; theological determinism and predestination; scientific and psychological determinism.</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
