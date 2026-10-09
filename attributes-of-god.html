@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philosophy of Religion: The Nature or Attributes of God</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .controls {
+            text-align: center;
+            margin: 1rem 0 0;
+        }
+
+        .controls button {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .controls button:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .badge {
+            background-color: rgba(3, 105, 161, 0.1);
+            color: var(--accent-primary);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .source {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">&#127968; Home</a>
+            <a href="philosophy.html" class="nav-btn">&larr; Paper 1</a>
+        </div>
+        <h1>Philosophy of Religion: The Nature or Attributes of God</h1>
+        <div class="controls">
+            <button type="button" onclick="document.querySelectorAll('.sub-node').forEach(n => n.classList.add('active'))">Open all</button>
+            <button type="button" onclick="document.querySelectorAll('.sub-node').forEach(n => n.classList.remove('active'))">Close all</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Attributes of God</div>
+
+            <div class="branches-wrapper">
+
+                <!-- LEFT COLUMN -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Omniscience, Omnipotence &amp; Omnibenevolence</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Classical theism and perfection</h3>
+                            <span class="badge">Foundations</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                God as the most perfect being: the three central attributes.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The three attributes <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Classical theism:</strong> God is the most perfect being that could exist. The three attributes are central to this conception of divine perfection.</li>
+                                        <li><strong>Omniscient:</strong> God is all-knowing &mdash; God knows all true propositions, or all that it is logically possible to know.</li>
+                                        <li><strong>Omnipotent:</strong> God is all-powerful &mdash; God has the power to do anything, or anything that is logically possible.</li>
+                                        <li><strong>Omnibenevolent:</strong> God is all-good &mdash; God wills only what is morally good, or always acts in the best logically possible way for creatures.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Omniscience &mdash; all-knowing</h3>
+                            <span class="badge">Scholars</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                How can God know all things &mdash; including future free choices?
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Scholarly views <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Aquinas:</strong> God knows all things by knowing his own essence. His knowledge is perfect, unlimited and immediate: God knows things together, not successively.</li>
+                                        <li><strong>Plantinga:</strong> Aquinas does not explain how God can know future free choices without determining them. Plantinga argues that God knows what any free creature would do in any set of circumstances.</li>
+                                        <li><strong>Process theology (Hartshorne, Whitehead, Cobb):</strong> God's knowledge is dynamic rather than complete and unchanging. God knows the world as it becomes, and God's knowledge grows as the world unfolds.</li>
+                                        <li><strong>Swinburne:</strong> omniscience means knowing all true propositions and believing no false ones. Future free actions are not yet true or false, so God cannot know them in advance without undermining their freedom.</li>
+                                        <li class="source"><em style="font-style:normal;">"To be omniscient is to know all true propositions and believe no false ones."</em> &mdash; Swinburne, The Coherence of Theism</li>
+                                        <li><strong>Biblical evidence:</strong> Psalm 139:4 &mdash; God knows words before they are spoken; Hebrews 4:13 &mdash; nothing in creation is hidden from God.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Omnipotence &mdash; all-powerful</h3>
+                            <span class="badge">Scholars</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Two main interpretations: anything at all, or anything logically possible.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Scholarly views <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Descartes:</strong> God could make a square circle, because even necessary truths depend on God's will.</li>
+                                        <li><strong>Aquinas:</strong> omnipotence does not include intrinsically impossible actions, or actions that would detract from God's perfection. God cannot sin, because sin is a defect rather than an exercise of power.</li>
+                                        <li><strong>Antony Kenny:</strong> for God, there is no difference between having the power to do something and it being logically possible for God to do it. Divine omnipotence is limited only by what is logically possible for a being with God's attributes.</li>
+                                        <li><strong>Biblical evidence:</strong> Matthew 19:26 &mdash; "With God all things are possible"; Luke 1:37 &mdash; "For with God nothing is impossible."</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Omnibenevolence &mdash; all-good</h3>
+                            <span class="badge">Scholars</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                God as the supreme good and source of all goodness.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Scholarly views <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Anselm:</strong> God is the one supreme good, completely self-sufficient and the source on which everything else depends.</li>
+                                        <li><strong>Aquinas:</strong> God is called good because God is the cause of goodness in things.</li>
+                                        <li><strong>Swinburne:</strong> God is perfectly good and always acts for the best.</li>
+                                        <li><strong>Biblical evidence:</strong> Psalm 106:1 &mdash; God's goodness and enduring love; John 3:16 &mdash; God's love for the world in giving his Son; Luke 1:50 &mdash; God's mercy.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Time, Coherence &amp; Challenges</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>What is God's relationship with time?</h3>
+                            <span class="badge">Eternity</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Everlasting within time, or eternal outside time.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Everlasting &mdash; God exists through time <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>God exists without beginning or end, within and throughout all time &mdash; at every moment, rather than outside time altogether.</li>
+                                        <li><strong>Swinburne:</strong> God is everlasting in the sense of existing at each moment of time.</li>
+                                        <li><strong>Wolterstorff:</strong> God is everlasting rather than timeless: God exists through time.</li>
+                                        <li><strong>Hartshorne:</strong> God's existence is everlasting and temporal.</li>
+                                        <li>This model allows God to experience temporal change and makes divine knowledge of future events a question of <strong>foreknowledge</strong>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Eternal &mdash; God is outside time <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>God is timeless, transcending the temporal order: outside past, present and future, surveying time in a single present.</li>
+                                        <li><strong>Boethius:</strong> "Eternity then, is the complete possession, all at once, of illimitable life." God experiences all temporal events in a simultaneous present.</li>
+                                        <li><strong>Anselm:</strong> "You were not, therefore, yesterday, nor will You be tomorrow, but yesterday and today and tomorrow You are."</li>
+                                        <li><strong>Aquinas:</strong> "God is altogether outside the border of time."</li>
+                                        <li><strong>Stump and Kretzmann:</strong> the classical account, following Boethius and Aquinas, treats God's knowledge as timeless rather than as prediction.</li>
+                                        <li><strong>Key issue:</strong> if God sees the whole of time at once, does divine knowledge determine what humans do, or can timeless knowledge be compatible with libertarian free will?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Everlasting vs eternal <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Everlasting:</strong> God is within time, existing at every moment; God's knowledge of future events is normally described as foreknowledge.</li>
+                                        <li><strong>Eternal:</strong> God is outside time; God does not predict future choices because all times are present to God simultaneously.</li>
+                                        <li>The distinction matters because it changes how the problem of divine foreknowledge and human freedom is understood.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Paradox of the stone &mdash; omnipotence</h3>
+                            <span class="badge">Coherence</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Can God create a stone so heavy that God cannot lift it?
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The paradox and its solutions <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The paradox:</strong> acceptable premises seem to produce a contradictory conclusion. If God can create the stone, there is something God cannot lift; if God cannot create it, there is something God cannot do. Either response appears to limit omnipotence.</li>
+                                        <li><strong>Averroes / Ibn Rushd:</strong> proposed the problem in this form, later restated by George Mavrodes.</li>
+                                        <li><strong>Mavrodes' solution:</strong> the task is self-contradictory once omnipotence is assumed. "Create a stone God cannot lift" combines God's omnipotence with the claim that God cannot lift the stone &mdash; so the task is logically impossible.</li>
+                                        <li><strong>Savage's solution:</strong> the description of the stone is itself incoherent. An omnipotent being cannot have something it cannot lift, so the proposed object is like a square circle.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Omniscience vs free will</h3>
+                            <span class="badge">Coherence</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                If God knows beforehand everything humans will do, are their actions free?
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Scholarly responses <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The problem:</strong> if God knows beforehand everything humans will do, are their actions still free? Conversely, if human actions are genuinely free, can God be omniscient?</li>
+                                        <li><strong>Stump and Kretzmann &mdash; God as eternal:</strong> God knows all human actions timelessly, not by making predictions. If a person freely chooses A, God eternally knows A; if the person had freely chosen B, God would eternally know B. Divine knowledge is therefore compatible with libertarian free will.</li>
+                                        <li><strong>Kenny &mdash; God as everlasting:</strong> God's foreknowledge occurs before the human choice, but knowing does not cause the event. God's knowledge tracks what free creatures will in fact choose without determining their choices.</li>
+                                        <li><strong>Swinburne:</strong> if future free actions are not yet true or false, God cannot know them without making them non-free &mdash; creating tension between omniscience and libertarian freedom.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Omnibenevolence vs omnipotence &amp; the Euthyphro dilemma</h3>
+                            <span class="badge">Coherence</span>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.4;">
+                                Suffering, divine power, and the source of goodness.
+                            </p>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Process theology <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The problem:</strong> if God is both all-powerful and perfectly good, why does God not intervene to prevent suffering? This creates a tension between omnibenevolence and omnipotence.</li>
+                                        <li><strong>Process theology:</strong> God voluntarily limits divine power and cannot simply control events. God therefore becomes an empathetic fellow sufferer with creation.</li>
+                                        <li><strong>Evaluation question:</strong> does limiting divine power preserve benevolence at the cost of the traditional understanding of omnipotence and divine worship?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>The Euthyphro dilemma <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>The dilemma:</strong> is something morally good because God wills or commands it, or does God will it because it is already good?</li>
+                                        <li><strong>Horn 1 &mdash; Kierkegaard:</strong> in exceptional cases, God's command can place the individual above ordinary ethical rules. Ethics is judged in light of God, rather than God's authority being judged by ordinary human ethics.</li>
+                                        <li><strong>Horn 2 &mdash; Plato / Socrates:</strong> "The gods love the pious because it is pious" &mdash; the pious is loved because it is pious, not made pious merely by being loved. Goodness therefore does not depend on divine command (Plato, Euthyphro).</li>
+                                        <li><strong>Aquinas &mdash; avoids both horns:</strong> natural law bridges divine goodness and human moral reasoning. God's nature is perfect goodness; eternal law is God's rational ordering of creation; natural law is the part humans can understand. It is neither an independent standard nor arbitrary divine command.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
