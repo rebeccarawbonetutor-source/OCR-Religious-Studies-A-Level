@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developments in Christian Thought: The Person of Jesus Christ</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc; --card-bg: #ffffff; --card-border: #94a3b8;
+            --text-main: #0f172a; --text-muted: #475569;
+            --accent-primary: #0369a1; --accent-header: #075985;
+            --hover-bg: #f1f5f9; --line-color: #0369a1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main);
+            min-height: 100vh; display: flex; flex-direction: column; overflow-x: auto;
+        }
+        header { padding: 1.5rem 1rem 1rem; text-align: center; border-bottom: 1px solid #cbd5e1; background: #ffffff; position: relative; }
+        .nav-container { position: absolute; top: 1.5rem; left: 2rem; display: flex; gap: 10px; }
+        .nav-btn {
+            background-color: #ffffff; color: var(--accent-header); border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; text-decoration: none;
+            font-size: 0.9rem; transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .nav-btn:hover { background-color: var(--hover-bg); border-color: var(--accent-primary); }
+        header h1 { font-size: 2.2rem; color: var(--accent-header); font-weight: 700; }
+        .container {
+            max-width: 1800px; margin: 0 auto; padding: 3rem 2rem;
+            display: flex; flex-direction: column; align-items: center; flex: 1; width: 100%;
+        }
+        .mindmap { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; }
+        .root-node {
+            background-color: var(--accent-header); color: #ffffff; padding: 1.2rem 3rem;
+            border-radius: 12px; font-weight: bold; font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2); z-index: 2;
+            text-align: center; margin-bottom: 4rem; letter-spacing: 0.5px;
+        }
+        .branches-wrapper {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            width: 100%; max-width: 1600px; position: relative;
+        }
+        .branches-wrapper::before {
+            content: ''; position: absolute; top: -40px; left: 50%;
+            width: 3px; height: 40px; background-color: var(--line-color); transform: translateX(-50%);
+        }
+        .branch-column { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
+        .branch-group-header {
+            background-color: #e0f2fe; border: 2px solid var(--accent-primary);
+            color: var(--accent-header); padding: 1rem 1.5rem; border-radius: 10px;
+            font-size: 1.25rem; font-weight: bold; text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .node-card {
+            background-color: var(--card-bg); border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary); border-radius: 8px; padding: 1.25rem;
+            display: flex; flex-direction: column; gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .node-card:hover { transform: translateY(-2px); box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15); }
+        .node-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;
+        }
+        .node-header h3 { font-size: 1.1rem; color: var(--accent-header); font-weight: 700; }
+        .sub-nodes-container { display: flex; flex-direction: column; gap: 0.6rem; }
+        .sub-node {
+            background-color: #f8fafc; border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary); padding: 0.75rem;
+            border-radius: 0 6px 6px 0; font-size: 0.95rem; cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .sub-node:hover { background-color: var(--hover-bg); }
+        .sub-node h4 {
+            font-size: 1rem; color: var(--text-main); display: flex;
+            justify-content: space-between; align-items: center; font-weight: 600;
+        }
+        .sub-node h4::after { content: '+'; color: var(--accent-primary); font-weight: bold; font-size: 1.1rem; }
+        .sub-node.active h4::after { content: '-'; }
+        .sub-content {
+            display: none; margin-top: 0.5rem; color: var(--text-muted);
+            font-size: 0.9rem; line-height: 1.5; border-top: 1px dashed #cbd5e1; padding-top: 0.5rem;
+        }
+        .sub-node.active .sub-content { display: block; }
+        ul { margin-left: 1.2rem; margin-top: 0.3rem; list-style-type: disc; }
+        ul li { margin-bottom: 0.4rem; }
+        @media (max-width: 1024px) { .branches-wrapper { grid-template-columns: 1fr; gap: 2rem; } .branches-wrapper::before { display: none; } }
+        @media (max-width: 768px) { .nav-container { position: static; justify-content: center; margin-bottom: 1rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="dct.html" class="nav-btn">← Paper 3</a>
+        </div>
+        <h1>Developments in Christian Thought: The Person of Jesus Christ</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">The person of Jesus Christ</div>
+
+            <div class="branches-wrapper">
+
+                <!-- LEFT COLUMN: Knowledge and Understanding -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Knowledge & understanding</div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Jesus' authority as the Son of God</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Knowledge of God and divine identity <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Intimate relationship with God:</strong> Jesus called God "Abba" (Father), indicating close relational trust rather than an assertion of being literally divine in the synoptic texts.</li>
+                                        <li><strong>Self-awareness and divine consciousness:</strong> Doesn't seem to regard himself as equal with God and spends time in prayer; predicts his death and resurrection. John's "I am" sayings (<em>ego eimi</em>) echo the Old Testament divine name (<em>Exodus 3:14</em>), though John's Gospel was written later than the synoptic gospels. <strong>Karl Rahner</strong> proposed an "onion-skin" model of Christ's consciousness (surface human self-awareness with deeper intuitive awareness of union with God), while <strong>Gerald O'Collins</strong> argued the gospel traditions reflect Jesus' unique awareness of his divine sonship and mission.</li>
+                                        <li><strong>Early Church doctrine (Nicaea and Chalcedon):</strong> The Council of Nicaea (325 CE) affirmed that Jesus is <em>homoousios</em> (of the same substance) with the Father, rejecting Arianism; the Council of Chalcedon (451 CE) defined Jesus as "the self-same Perfect in Godhead, the self-same Perfect in Manhood; truly God and truly Man... co-essential with the Father according to the Godhead, and co-essential with us according to the Manhood", rejecting Docetism, Nestorianism and Monophysitism.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Miracles and signs <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Types of miracles:</strong> Jesus performs healings, exorcisms, nature miracles and raisings from the dead — often seen as pointing to the arrival of the kingdom of God, though Jesus frequently told people not to tell others rather than performing them to draw crowds.</li>
+                                        <li><strong>Calming the storm (Mark 4:35–41):</strong> Shows authority over chaotic forces of nature, which in Jewish thought only God could control; Jesus uses the phrase "Peace, be still!" and the disciples ask, "Who then is this, that even the wind and the sea obey him?"</li>
+                                        <li><strong>Works of power (John 9:1–41):</strong> John's Gospel calls miracles <em>signs</em> (<em>semeia</em>). Healing the man born blind accompanies Jesus' claim "I am the light of the world" and challenges the Pharisees, pointing to his divine origin as Son of Man.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Resurrection and salvation <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Central Christian belief (1 Corinthians 15:17):</strong> "And if Christ has not been raised, your faith is futile; you are still in your sins." Ultimate sign Jesus came to earth as both divine and human; Jesus as God raised himself from death, showing death is not the end.</li>
+                                        <li><strong>Historical details & early faith:</strong> The gospels take pains to describe Jesus as having truly died (the spear pierces his side and blood and water flow out), the tomb is found empty and grave clothes discarded, and belief in the resurrection led to a new religious movement.</li>
+                                        <li><strong>Interpretations & salvation:</strong> Paul's letters (earlier than the gospels) speak of Jesus' resurrection appearances without mentioning the empty tomb; <strong>Rudolf Bultmann</strong> argued the New Testament must be demythologised so the "Christ of faith" is encountered existentially rather than relying on literal miracles. In Christian soteriology (e.g. <strong>Augustine</strong>, <strong>Calvin</strong>), Christ's death and resurrection atone for the Fall and open salvation and eternal relationship with God.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Jesus' authority as a teacher of wisdom</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Teaching and society <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Method and challenge:</strong> Parables were similar to those of Jewish rabbis, though Jesus used new images; he challenged the mindset of his day on what is morally right and what needs to be done (e.g. "the Sabbath was made for humankind, not humankind for the Sabbath").</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Repentance, forgiveness and the Sermon on the Mount <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>God's forgiveness and human forgiveness:</strong> Taught people to pray "Our Father" (<em>abba</em>) and seek forgiveness as they forgive others; forgiveness does not have limits ("seventy-seven times", Matthew 18:22).</li>
+                                        <li><strong>Parable of the Prodigal Son (Luke 15:11–32):</strong> Shows God's unconditional, extravagant love for the repentant sinner and warns against the self-righteousness of the elder brother.</li>
+                                        <li><strong>Sermon on the Mount (Matthew 5–7):</strong> Fulfils rather than abolishes the Law; Beatitudes ("Blessed are the poor in spirit..."); interiorisation of ethics (anger likened to murder, lust to adultery); non-retaliation ("turn the other cheek", go the extra mile, refuse oaths); love of enemies ("Love your enemies and pray for those who persecute you"); perfection of love ("Be perfect, therefore, as your heavenly Father is perfect", Matthew 5:48).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Jesus' authority as a liberator</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>First-century Palestine and religious authorities <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Political and religious groups:</strong> <em>Romans</em> ruled through Herodian client rulers and imposed heavy taxation; <em>Pharisees</em> emphasised strict observance of the Law and oral tradition; <em>Sadducees</em> controlled the Temple and cooperated with Rome; <em>Zealots</em> sought violent overthrow of Roman occupation.</li>
+                                        <li><strong>Clashing with religious authorities:</strong> Jesus was critical of legalism, hypocrisy and Temple abuses, associated with tax collectors and sinners, ate with outcasts, and championed the poor and marginalised.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Jesus' actions and liberation of the marginalised <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Women and outsiders:</strong> Treated women as disciples and equals (e.g. Mary and Martha, Luke 10:38–42; Samaritan woman, John 4), affirming dignity beyond domestic roles.</li>
+                                        <li><strong>Outcasts and the poor:</strong> Healing of the Gerasene demoniac (Mark 5:1–20) restores an isolated outcast to community; parable of the Rich Man and Lazarus (Luke 16:19–31) warns against neglecting the poor.</li>
+                                        <li><strong>Political and liberationist readings:</strong> <strong>Reza Aslan</strong> (<em>Zealot</em>), <strong>S. G. F. Brandon</strong> and <strong>Richard Horsley</strong> interpret Jesus against the backdrop of Roman imperial oppression, pointing to his cleansing of the Temple and execution by crucifixion as a threat to Rome. Liberation theologians <strong>Gustavo Gutiérrez</strong>, <strong>Leonardo Boff</strong> and <strong>Jon Sobrino</strong> argue Jesus inaugurated the Kingdom in history through preferential solidarity with the poor and oppressed.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Analysis and Evaluation -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Analysis & evaluation</div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Was Jesus' relationship with God very special or truly unique?</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Very special (human prophet/teacher) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>As a teacher of wisdom, prophet and liberator, Jesus fits within the Old Testament tradition of figures with a special relationship with God, modelling prayer, care for the poor and prophetic challenge.</li>
+                                        <li><strong>Albert Schweitzer</strong> (<em>The Quest of the Historical Jesus</em>) concluded that the historical Jesus was an apocalyptic Jewish prophet whose expectation of an imminent end of the world did not materialise, rather than the Jesus of later creeds.</li>
+                                        <li><strong>Rudolf Bultmann</strong> argued that historical-critical study cannot reconstruct a biography of Jesus behind the gospels' faith proclamations, and <strong>John Hick</strong> viewed Jesus as uniquely open to God ("God-consciousness") rather than literally God incarnate.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Truly unique (divine Son of God) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>The gospels present more than a prophet: unusual birth narratives, moments of divine revelation at the baptism and transfiguration, and authority to forgive sins and command nature.</li>
+                                        <li><strong>C. S. Lewis's trilemma</strong> (<em>Mere Christianity</em>): Given Jesus' radical claims and authority, he cannot merely be a great moral teacher — he is either Lord, liar or lunatic.</li>
+                                        <li><strong>N. T. Wright</strong> argues the bodily resurrection is the best historical explanation for the empty tomb, post-mortem appearances and the rise of early Christian worship of Jesus.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Did Jesus think of himself as divine?</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments that he did <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Luke 2:41–52:</strong> As a boy in the Temple, Jesus says, "Why were you searching for me? Didn't you know I had to be in my Father's house?", suggesting early awareness of his unique relationship with God.</li>
+                                        <li><strong>John 8:58 & 10:30:</strong> Jesus declares "Before Abraham was, I am!" and "I and the Father are one", claiming pre-existence and divine unity; <strong>Gerald O'Collins</strong> argues Jesus' implicit claims (forgiving sins, redefining the Torah) point to a unique filial self-awareness.</li>
+                                        <li>Even when feeling abandoned on the cross (Mark 15:34), Jesus retained trust in God and awareness of a redemptive mission.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments that he did not <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>It is difficult to understand how a genuinely human consciousness could be completely God and omniscient at the same time (cf. <strong>John Hick</strong>, who interprets incarnation metaphorically, and <strong>Karl Rahner's</strong> layered consciousness model).</li>
+                                        <li>In the synoptic gospels, Jesus prays to God, asks "Why do you call me good? No one is good except God alone" (Mark 10:18), and disclaims knowledge of the final hour (Mark 13:32), suggesting high Christology developed after the resurrection (cf. <strong>James Dunn</strong>).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Was Jesus only a teacher of wisdom?</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments that his wisdom teaching is central <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>Much of Jesus' ministry consisted of teaching through parables and ethical sayings ("love your neighbour", "turn the other cheek") that have shaped global morality.</li>
+                                        <li><strong>Thomas Jefferson</strong> (<em>The Life and Morals of Jesus of Nazareth</em>) and secular humanists treat Jesus as an extraordinary moral philosopher whose ethical teachings stand independently of miracles or dogma.</li>
+                                        <li>Many followers knew him first as a <em>rabbi</em> or teacher, and his crucifixion ended his earthly ministry, leaving his teachings behind.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments that he was far more than a teacher <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>C. S. Lewis</strong> argues that reducing Jesus to a great moral teacher ignores his claims to forgive sins and judge the world; <strong>E. P. Sanders</strong> notes Jesus' eschatological message and Temple action went far beyond wisdom instruction.</li>
+                                        <li>Miracles, exorcisms and table fellowship enacted liberation, not just moral advice.</li>
+                                        <li>For Christians, his saving death and resurrection are the core of the gospel — without salvation, Christianity collapses into mere moralism.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header"><h3>Was Jesus more than a political liberator?</h3></div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments for political liberator <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Reza Aslan</strong>, <strong>S. G. F. Brandon</strong> and <strong>Richard Horsley:</strong> Place Jesus within anti-imperial Jewish resistance; he challenged Temple elites and Roman power and was executed by crucifixion — the Roman punishment for political rebels.</li>
+                                        <li><strong>Gustavo Gutiérrez</strong> and <strong>Leonardo Boff:</strong> Emphasise that Jesus' proclamation of the Kingdom (Luke 4:18–19) cannot be spiritualised away from concrete social and economic liberation for the poor.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Arguments that he was more than a political liberator <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Refusal of violent rebellion:</strong> Rejected Zealot violence ("put your sword back in its place", Matthew 26:52), taught love of enemies and said "Give back to Caesar what is Caesar's and to God what is God's" (Mark 12:17; cf. <strong>N. T. Wright</strong>).</li>
+                                        <li><strong>Spiritual transformation over political coup:</strong> Declared "My kingdom is not of this world" (John 18:36) and focused on inner purity, forgiveness of sins and eternal salvation rather than overthrowing Rome; his crucifixion is understood by Christians as a redemptive sacrifice destined by God rather than a failed political uprising.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(element) { element.classList.toggle('active'); }
+    </script>
+</body>
+</html>
