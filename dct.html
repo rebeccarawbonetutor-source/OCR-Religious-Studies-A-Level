@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width="device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paper 3: Developments in Christian Thought — Specification</title>
     <style>
         :root {
@@ -37,7 +37,11 @@
             border-left: 5px solid var(--accent-primary); border-radius: 8px;
             padding: 1.1rem 1.25rem; transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); color: inherit;
-            display: flex; flex-direction: column; gap: 0.5rem;
+            display: flex; flex-direction: column; gap: 0.5rem; text-decoration: none;
+        }
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
         }
         .topic-card h3 {
             font-size: 1.05rem; color: var(--accent-header); font-weight: 700;
@@ -55,58 +59,73 @@
 
     <header>
         <div class="nav-container">
-            <a href="index.html" class="nav-btn">&#127968; Home</a>
+            <a href="index.html" class="nav-btn">🏠 Home</a>
         </div>
         <h1>Developments in Christian Thought</h1>
-        </header>
+    </header>
 
     <div class="container">
         <div class="spec-grid">
 
-            <div class="topic-card">
-                <h3>Augustine's Teaching on Human Nature <span class="arrow">&rarr;</span></h3>
-                <p>Genesis 3 and the Fall, friendship before and lust after; Original Sin, its effects on the will and societies; only God's grace can overcome sin.</p>
-            </div>
+            <a href="Augustine-human-nature.html" class="topic-card">
+                <h3>Augustine's Teaching on Human Nature <span class="arrow">→</span></h3>
+                <p>Genesis 3 and the Fall, relationships pre- and post-Fall; Original Sin and its effects on the will and human societies; God's grace overcoming sin.</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>Death and the Afterlife <span class="arrow">&rarr;</span></h3>
-                <p>Judgement, heaven and hell, purgatory; election — limited, unlimited and universalist; the parable of the sheep and the goats.</p>
-            </div>
+            <a href="Death-afterlife.html" class="topic-card">
+                <h3>Death and the Afterlife <span class="arrow">→</span></h3>
+                <p>Heaven, hell and purgatory as places, spiritual states or symbols; election — limited, unlimited and universalist; the parable of the sheep and the goats (Matthew 25:31–46).</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>Knowledge of God's Existence <span class="arrow">&rarr;</span></h3>
-                <p>Natural knowledge through reason and empiricism (Calvin, Romans 1); revealed knowledge through grace and faith (Barth); their relative sufficiency.</p>
-            </div>
+            <a href="Knowledge-of-God.html" class="topic-card">
+                <h3>Knowledge of God's Existence <span class="arrow">→</span></h3>
+                <p>Natural knowledge through innate sense of the divine and order of creation (Calvin, Romans 1:18–21); revealed knowledge through faith, grace, Christ, Church and Bible (Barth).</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>The Person of Jesus Christ <span class="arrow">&rarr;</span></h3>
-                <p>Jesus as Son of God, teacher of wisdom, liberator; his authority, resurrection and divinity — the views of Bultmann, Hick and John's Gospel.</p>
-            </div>
+            <a href="Jesus.html" class="topic-card">
+                <h3>The Person of Jesus Christ <span class="arrow">→</span></h3>
+                <p>Jesus' authority as Son of God (miracles, resurrection), teacher of wisdom and liberator; his relationship with God and divinity.</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>Christian Moral Principles <span class="arrow">&rarr;</span></h3>
-                <p>Dominant secular vs Christian values; the Bible as a moral guide; agape, reason and conscience — whether Christian ethics are distinctive.</p>
-            </div>
+            <a href="Moral-principles.html" class="topic-card">
+                <h3>Christian Moral Principles <span class="arrow">→</span></h3>
+                <p>Bible as sole authority; Bible, Church and reason combined; love (agape) governing Christian practices; whether Christian ethics are distinctive.</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>Christian Moral Action <span class="arrow">&rarr;</span></h3>
-                <p>Bonhoeffer: obedience and civil disobedience, suffering, and the cost of discipleship; whether his theology has relevance today.</p>
-            </div>
+            <a href="Moral-action.html" class="topic-card">
+                <h3>Christian Moral Action <span class="arrow">→</span></h3>
+                <p>Bonhoeffer: Church and State, obedience and civil disobedience, Confessing Church and Finkenwalde, costly grace and suffering; relevance today.</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>Gender and Theology <span class="arrow">&rarr;</span></h3>
-                <p>Gender, God and feminist theology; Ruether and Daly on patriarchy, whether Christianity can be changed or should be abandoned.</p>
-            </div>
+            <a href="Pluralism-theology.html" class="topic-card">
+                <h3>Religious Pluralism and Theology <span class="arrow">→</span></h3>
+                <p>Exclusivism, inclusivism ("anonymous" Christians) and pluralism; whether Christ as "truth" allows other means of salvation and whether a loving God denies salvation.</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>The Challenge of Secularism <span class="arrow">&rarr;</span></h3>
-                <p>Secularisation and its causes; God as illusion (Freud, Dawkins); Christianity and public life; responses from believers.</p>
-            </div>
+            <a href="Pluralism-society.html" class="topic-card">
+                <h3>Religious Pluralism and Society <span class="arrow">→</span></h3>
+                <p>Contemporary multi-faith societies and migration; Christian responses to inter-faith dialogue (Catholic <em>Redemptoris Missio</em> 55–57, Church of England <em>Sharing the Gospel of Salvation</em>) and scriptural reasoning.</p>
+            </a>
 
-            <div class="topic-card">
-                <h3>Liberation Theology and Marx <span class="arrow">&rarr;</span></h3>
-                <p>Marx's influence, sin as structural injustice, praxis and orthopraxy; Romero and the option for the poor; criticisms from the Magisterium.</p>
-            </div>
+            <a href="Gender-society.html" class="topic-card">
+                <h3>Gender and Society <span class="arrow">→</span></h3>
+                <p>Christian teaching on roles of men and women in family and society (Ephesians 5:22–33, <em>Mulieris Dignitatem</em> 18–19); responses to secular views on gender, motherhood and family.</p>
+            </a>
+
+            <a href="Gender-theology.html" class="topic-card">
+                <h3>Gender and Theology <span class="arrow">→</span></h3>
+                <p>Feminist reinterpretation of God: Rosemary Radford Ruether and Mary Daly on patriarchy, maleness of Christ and whether Christianity can be reformed or abandoned.</p>
+            </a>
+
+            <a href="Secularism.html" class="topic-card">
+                <h3>The Challenge of Secularism <span class="arrow">→</span></h3>
+                <p>Rise of secularism and secularisation; God as illusion and wish fulfilment (Freud, Dawkins); secular humanist views on public life and responses from believers.</p>
+            </a>
+
+            <a href="Liberation-theology.html" class="topic-card">
+                <h3>Liberation Theology and Marx <span class="arrow">→</span></h3>
+                <p>Marx's alienation and exploitation; structural sin, preferential option for the poor and orthopraxis over orthodoxy; debates on engaging with Marxism.</p>
+            </a>
 
         </div>
     </div>
