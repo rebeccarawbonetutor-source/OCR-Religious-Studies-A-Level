@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developments in Christian Thought: Pluralism and Theology</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #94a3b8;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-primary: #0369a1;
+            --accent-header: #075985;
+            --hover-bg: #f1f5f9;
+            --line-color: #0369a1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        header {
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #cbd5e1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 1.5rem;
+            left: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: var(--accent-header);
+            border: 1px solid var(--card-border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-primary);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        .mindmap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .root-node {
+            background-color: var(--accent-header);
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.2);
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.5px;
+        }
+
+        .branches-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+        }
+
+        .branches-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background-color: var(--line-color);
+            transform: translateX(-50%);
+        }
+
+        .branch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .branch-group-header {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-header);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .node-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-left: 5px solid var(--accent-primary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .node-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px -3px rgba(3, 105, 161, 0.15);
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .node-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-header);
+            font-weight: 700;
+        }
+
+        .sub-nodes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .sub-node {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-left: 3px solid var(--accent-primary);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .sub-node:hover {
+            background-color: var(--hover-bg);
+        }
+
+        .sub-node h4 {
+            font-size: 1rem;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sub-node h4::after {
+            content: '+';
+            color: var(--accent-primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .sub-node.active h4::after {
+            content: '-';
+        }
+
+        .sub-content {
+            display: none;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 0.5rem;
+        }
+
+        .sub-node.active .sub-content {
+            display: block;
+        }
+
+        ul {
+            margin-left: 1.2rem;
+            margin-top: 0.3rem;
+            list-style-type: disc;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .branches-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .branches-wrapper::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="dct.html" class="nav-btn">← Paper 3</a>
+        </div>
+        <h1>Developments in Christian Thought: Pluralism and Theology</h1>
+    </header>
+
+    <div class="container">
+        <div class="mindmap">
+            <div class="root-node">Pluralism and theology</div>
+
+            <div class="branches-wrapper">
+
+                <!-- LEFT COLUMN: Knowledge and Understanding -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Knowledge & understanding</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Exclusivism</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Core claim <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>Only Christianity holds the full truth and can offer salvation through explicit faith in Jesus Christ.</li>
+                                        <li><strong>John 14:6:</strong> "I am the way and the truth and the life. No one comes to the Father except through me."</li>
+                                        <li><strong>Acts 4:12:</strong> Salvation is found in no one else; there is no other name under heaven by which people must be saved.</li>
+                                        <li><strong>1 Corinthians 13:12:</strong> Partial human knowledge now ("see in a mirror dimly") is used to explain why non-Christian insight falls short of full saving revelation.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Forms of exclusivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Restricted access exclusivism:</strong> Salvation requires hearing the Christian message and accepting it in this life; those who never hear are lost.</li>
+                                        <li><strong>Universal access exclusivism:</strong> Christ is the sole means of salvation, yet a just, loving God ensures everyone (past, present and future) has an opportunity to respond — e.g. <strong>CS Lewis</strong> (Christ's grace reaching sincere seekers), <strong>Molinism</strong> (middle knowledge of how people would respond) or post-mortem evangelism.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Church views <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Historical Catholic teaching:</strong> <em>Extra ecclesiam nulla salus</em> ("outside the Church there is no salvation", Council of Florence 1442).</li>
+                                        <li><strong>Conservative Evangelical & Reformed churches:</strong> Strictly exclusivist, grounded in <em>solus Christus</em> (Christ alone) and <em>sola fide</em> (faith alone) from Reformation confessions (e.g. <em>Westminster Confession</em>); the <strong>Lausanne Covenant</strong> (1974) affirms Christ as the sole Saviour and rejects syncretism or treating all religions as equal channels of Christ's voice.</li>
+                                        <li><strong>Church of England (Article 18):</strong> The <em>Thirty-Nine Articles</em> reject the claim that every person is saved simply by living sincerely according to their own law or sect, affirming salvation only through the name of Christ.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Augustine of Hippo (354–430) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> Early Christian bishop and theologian in Roman North Africa whose writings shaped Western Christian orthodoxy.</li>
+                                        <li><strong>What:</strong> Taught that salvation is strictly limited to those within the visible Church who receive God's unmerited grace through Christ (<em>extra ecclesiam nulla salus</em>).</li>
+                                        <li><strong>Why:</strong> Reacting against Pelagius (who claimed humans could earn salvation through moral effort alone), Augustine argued that Adam's fall left all humanity as a "mass of perdition" incapable of saving itself.</li>
+                                        <li><strong>How:</strong> Proposed unconditional election and predestination: an omnipotent, omniscient God chooses certain individuals for salvation solely through grace in Christ, leaving the rest justly condemned.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>John Calvin (1509–1564) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> French Protestant Reformer based in Geneva and author of <em>Institutes of the Christian Religion</em>.</li>
+                                        <li><strong>What:</strong> Defended strict Reformed exclusivism and double predestination — God actively decrees some for eternal salvation through Christ and others for damnation.</li>
+                                        <li><strong>Why:</strong> Wanted to safeguard the absolute sovereignty of God against any suggestion that human rituals, good works or non-Christian traditions could influence divine judgment.</li>
+                                        <li><strong>How:</strong> Argued that because human reason is corrupted by total depravity, non-Christian religions produce only distorted, idolatrous notions of God; saving knowledge comes exclusively through Scripture and Christ.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Karl Barth (1886–1968) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> Swiss Reformed theologian and leading figure of twentieth-century neo-orthodoxy, author of <em>Church Dogmatics</em>.</li>
+                                        <li><strong>What:</strong> Held a Christocentric exclusivism in which salvation and true knowledge of God occur solely through God's self-revelation in Jesus Christ.</li>
+                                        <li><strong>Why:</strong> Horrified by how liberal Protestant theologians in 1914 used human culture and natural theology to justify German nationalism in the First World War, Barth rejected all human attempts to build a bridge to God.</li>
+                                        <li><strong>How:</strong> Drew a sharp contrast between <strong>religion</strong> (humanity's proud, idolatrous effort to grasp God, which applies to institutional Christianity just as much as other faiths) and <strong>revelation</strong> (God reaching down to humanity in Christ alone).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Hans Urs von Balthasar (1905–1988) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> Swiss Roman Catholic theologian and priest, best known in this debate for opposing Karl Rahner's inclusivism from a Christocentric exclusivist standpoint.</li>
+                                        <li><strong>What:</strong> Rejected Rahner's concept of "anonymous Christians", arguing that salvation and Christian identity cannot be separated from explicit encounter with the Cross of Christ.</li>
+                                        <li><strong>Why:</strong> Feared that Rahner's inclusivism diluted the scandal and uniqueness of the Gospel to fit comfortably into a modern, secular, pluralist society.</li>
+                                        <li><strong>How:</strong> Argued that calling devout followers of other religions "anonymous Christians" is patronising to their actual beliefs, lacks any evidence of their inner spiritual state and flattens genuine theological differences.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Inclusivism</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Core claim <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>Salvation ultimately comes exclusively through Christ, but people outside visible Christianity may still be saved by responding to truth and goodness within their own religion.</li>
+                                        <li><strong>1 Timothy 2:4:</strong> God wants all people to be saved and to come to a knowledge of the truth, reflecting God's universal salvific will.</li>
+                                        <li><strong>Matthew 25 (Sheep and Goats):</strong> People serve and respond to Christ implicitly through moral love and care for others without realising it.</li>
+                                        <li><strong>Acts 17 (Areopagus):</strong> Paul tells the Athenians they already worship an "unknown god" without knowing it, used to show God's grace is active before explicit Christian preaching.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Church views <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Roman Catholic Church (Vatican II & Catechism):</strong> <em>Nostra Aetate</em> (1965) rejects nothing true and holy in other religions; <em>Lumen Gentium</em> (1964) and CCC 847 teach that those ignorant of the Gospel through no fault of their own who sincerely seek God can attain salvation; CCC 843 and <em>Dominus Iesus</em> (2000) affirm Christ as sole mediator while recognising a search for the unknown yet near God in other faiths.</li>
+                                        <li><strong>Eastern Orthodox Church:</strong> Holds that the Orthodox Church preserves the fullness of Christian truth while refusing to set limits on God's grace outside it ("we know where the Church is, we do not know where it is not"), drawing on early Greek Fathers (e.g. Justin Martyr's <em>logos spermatikos</em>) to recognise seeds of truth in other traditions.</li>
+                                        <li><strong>Anglican Communion:</strong> While historical formularies lean exclusivist, modern documents such as <em>Generous Love</em> (2008) call for faithful witness to Christ alongside affirming God's Spirit at work beyond visible church boundaries.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Karl Rahner (1904–1984) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> German Jesuit priest and one of the most influential Catholic theologians of the twentieth century, a key architect of the Second Vatican Council (Vatican II).</li>
+                                        <li><strong>What:</strong> Developed the theory of <strong>"anonymous Christians"</strong>, proposing that people who live before Christ or never encounter the Gospel can still receive Christ's saving grace implicitly.</li>
+                                        <li><strong>Why:</strong> Troubled by the moral injustice of an omnibenevolent God condemning billions of sincere people — including Old Testament figures like Abraham and Moses — simply due to historical or geographical accident.</li>
+                                        <li><strong>How:</strong> Distinguished between <em>ontological</em> necessity (Christ is the cause of all salvation) and <em>epistemological</em> necessity (a person does not need to consciously know Christ during their lifetime to be saved by him). Building on Acts 17, Rahner argued humans are naturally oriented towards grace, though implicit faith remains incomplete compared to explicit Christian faith.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Pluralism</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Core claim <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li>All major world religions are equally valid paths to salvation and ultimate reality; Christianity is only one possible path, with no single religion holding a monopoly on truth.</li>
+                                        <li><strong>John 10:16:</strong> Jesus speaks of having "other sheep that do not belong to this sheep pen" and bringing them into one flock, read as openness beyond traditional Christian boundaries.</li>
+                                        <li>Responds to modern religious diversity by rejecting exclusivist claims of superiority as morally arrogant and intellectually implausible.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Church views <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Quakers (Religious Society of Friends):</strong> Teach that there is "that of God in everyone" (the Inner Light); modern British Quakers frequently embrace religious pluralism, seeing different faiths as varied human responses to the same divine Spirit.</li>
+                                        <li><strong>Liberal Protestantism & ecumenical dialogue:</strong> Many liberal Protestant theologians and inter-faith initiatives emphasise God's universal love, shared ethical values and mutual respect across world religions rather than exclusive claims of truth.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>John Hick (1922–2012) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> British philosopher of religion and Presbyterian minister who moved from evangelical exclusivism to radical religious pluralism while teaching in multicultural Birmingham in the 1970s.</li>
+                                        <li><strong>What:</strong> Proposed a <strong>"Copernican Revolution" in theology</strong>, arguing that world religions revolve around God (or "the Real") rather than around Christianity.</li>
+                                        <li><strong>Why:</strong> After working alongside devout Muslims, Sikhs, Hindus and Jews in Birmingham, Hick concluded it was incoherent for a loving God to restrict salvation to the accident of being born into a Christian culture.</li>
+                                        <li><strong>How:</strong> Borrowed Immanuel Kant's distinction between the <strong>noumenal</strong> (the unknowable ultimate reality in itself, which Hick calls <em>the Real</em>) and the <strong>phenomenal</strong> (how different cultures experience that reality through varied religious lenses). Illustrated by the <strong>blind men and the elephant</strong>: each faith grasps one aspect of the same reality and transforms followers from self-centredness to Reality-centredness.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Raimon Panikkar (1918–2010) <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Who:</strong> Spanish-Indian Catholic priest and scholar of comparative religion, born to a Spanish Catholic mother and an Indian Hindu father.</li>
+                                        <li><strong>What:</strong> Advocated relational pluralism and deep <strong>inter-faith dialogue</strong> over proselytising or conversion, proposing a "cosmotheandric" vision in which the divine, human and cosmic dimensions of reality are inseparable.</li>
+                                        <li><strong>Why:</strong> Living personally across both Christian and Hindu traditions convinced him that no single religion can exhaust the mystery of the divine, and that treating other faiths as rivals destroys genuine spiritual encounter.</li>
+                                        <li><strong>How:</strong> Argued that truth is discovered relationally when believers enter openly into one another's traditions without trying to absorb or convert each other.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Analysis and Evaluation -->
+                <div class="branch-column">
+                    <div class="branch-group-header">Analysis & evaluation</div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Assessing exclusivism</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Strengths of exclusivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Internally coherent:</strong> If Christ is uniquely the incarnation of God whose death atones for sin, it logically follows that salvation is only through him (John 14:6; Acts 4:12; Barth).</li>
+                                        <li><strong>Biblical fidelity:</strong> Takes New Testament exclusivist texts seriously rather than reinterpreting or sidelining them to fit modern secular expectations.</li>
+                                        <li><strong>Preserves religious distinctiveness:</strong> Respects genuine differences between faiths instead of flattening contradictory doctrines into sameness (von Balthasar).</li>
+                                        <li><strong>Universal access nuance:</strong> Universal access exclusivism avoids condemning the unreached while preserving Christ as the sole saviour (CS Lewis; Molinism).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Weaknesses of exclusivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Clashes with divine omnibenevolence:</strong> An all-loving God who desires universal salvation (1 Timothy 2:4) would not condemn billions simply because of historical or geographical accident (Hick; Rahner).</li>
+                                        <li><strong>Moral arrogance and division:</strong> Claiming exclusive access to truth encourages intolerance and dismisses deep moral goodness and spirituality in other faiths.</li>
+                                        <li><strong>Barth's radical dismissal:</strong> Labelling all non-Christian faiths as mere human idolatry fails to engage seriously with the lived spiritual depth of other traditions (Panikkar).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Assessing inclusivism</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Strengths of inclusivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Reconciles key Christian doctrines:</strong> Holds together Christ's unique salvific role (John 14:6) with God's universal desire to save all people (1 Timothy 2:4).</li>
+                                        <li><strong>Solves the problem of the unreached:</strong> Accounts fairly for pre-Christian figures (Abraham, Moses) and those who never hear the Gospel through no fault of their own.</li>
+                                        <li><strong>Biblical and traditional support:</strong> Supported by Matthew 25 (implicit response through moral action), Acts 17 (the "unknown god") and Vatican II.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Weaknesses of inclusivism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Patronising to other faiths:</strong> Calling a devout Buddhist or Muslim an "anonymous Christian" overrides their actual self-understanding without consent (Hick; von Balthasar).</li>
+                                        <li><strong>Unfalsifiable inner state:</strong> Rahner has no evidence of what is happening inside a non-Christian's conscience; he simply projects Christian categories onto them.</li>
+                                        <li><strong>Weakens evangelism and identity:</strong> If explicit faith in Christ is unnecessary, Christian mission and distinctive doctrine lose urgency (Barth; von Balthasar).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Assessing pluralism</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Strengths of pluralism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Fits a diverse, multi-faith world:</strong> Promotes genuine equality, humility and inter-faith dialogue over proselytising or superiority (Panikkar).</li>
+                                        <li><strong>Solves the accident of birth:</strong> Ensures salvation does not depend arbitrarily on where or when a person is born (Hick).</li>
+                                        <li><strong>Explains shared moral fruits:</strong> Accounts for genuine saintliness and transformation from self-centredness to Reality-centredness across different traditions.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Weaknesses of pluralism <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Mutually exclusive truth claims:</strong> Christianity affirms the incarnation and resurrection; Islam explicitly denies Jesus's divinity and crucifixion; Theravada Buddhism rejects a creator God. Contradictory claims cannot all be true at once.</li>
+                                        <li><strong>Strips away core doctrines:</strong> Hick reduces central historical claims (such as the incarnation) to mere "myths", leaving a lowest-common-denominator religion few actual believers recognise.</li>
+                                        <li><strong>Self-defeating absolutism:</strong> Pluralism claims to reject all absolute truth claims, yet makes its own absolute claim about "the Real" that overrides what every individual religion actually teaches.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <h3>Areas for discussion</h3>
+                        </div>
+                        <div class="sub-nodes-container">
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>Would a loving God ultimately deny any human being salvation? <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Restricted access exclusivism:</strong> Yes — salvation is only through explicit faith in Christ; human sin justly merits condemnation (Augustine; Calvin).</li>
+                                        <li><strong>Universal access exclusivism:</strong> No — Christ is the only saviour, but a loving God ensures everyone gets a fair opportunity to respond (CS Lewis; Molinism).</li>
+                                        <li><strong>Inclusivism:</strong> No — God wills universal salvation (1 Timothy 2:4), so Christ's grace reaches sincere non-Christians implicitly as "anonymous Christians" (Rahner).</li>
+                                        <li><strong>Catholic (Vatican II):</strong> No — those ignorant of the Gospel through no fault of their own who sincerely seek God can be saved through Christ's grace (<em>Lumen Gentium</em>; CCC 847).</li>
+                                        <li><strong>Pluralism:</strong> No — restricting salvation to one historical tradition contradicts divine love; all major faiths lead to the same ultimate reality (Hick; Panikkar).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sub-node" onclick="toggleNode(this)">
+                                <h4>If Christ is the truth, can there be any other means of salvation? <span></span></h4>
+                                <div class="sub-content">
+                                    <ul>
+                                        <li><strong>Restricted access exclusivism:</strong> No — Christ is the sole means of salvation, and those who do not hear or accept the Gospel are not saved (Augustine; Calvin; Barth).</li>
+                                        <li><strong>Universal access exclusivism:</strong> No other saviour, yet universal access — salvation is still exclusively through Christ, but God provides access to Christ for all (CS Lewis).</li>
+                                        <li><strong>Inclusivism:</strong> Not another saviour, but other channels — Christ is the ultimate truth and saviour, yet other religions can mediate his grace to anonymous Christians (Rahner).</li>
+                                        <li><strong>Catholic (Vatican II):</strong> Christ is the sole mediator, yet non-Christians may be saved if they respond to God's grace in conscience, ordered towards the Church (CCC 847).</li>
+                                        <li><strong>Pluralism:</strong> Yes — Christ is one true revelation of God, not the exclusive one; Christianity is "only one possible path" among many valid routes to ultimate reality (Hick; Panikkar; John 10:16).</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNode(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
